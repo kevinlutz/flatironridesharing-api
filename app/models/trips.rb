@@ -1,6 +1,6 @@
 class Trip  < ActiveRecord::Base
-    belongs_to :riders
-    belongs_to :drivers
+    belongs_to :rider
+    belongs_to :driver
 
     
 end

@@ -2,7 +2,6 @@ class Driver < ActiveRecord::Base
     has_many :trips
     has_many :riders, through: :trips
 
-
     # **CREATE METHOD** (doesn't persist however)
     def self.create_new_driver(first_name, last_name, years_of_experience, company)
         Driver.create(first_name: first_name, last_name: last_name, years_of_experience: years_of_experience, company: company)
@@ -12,7 +11,6 @@ class Driver < ActiveRecord::Base
     def self.list_all_drivers
         Driver.all
     end
-
 
     # **READ INSTANCE METHODS**
     #Show the full name of a specific driver
@@ -42,25 +40,19 @@ class Driver < ActiveRecord::Base
         Driver.where("years_of_experience > 9")
     end
 
-    #Find all drivers who work for Uber
-    def self.drives_for_uber
-        Driver.where("company = ?", "Uber")
+    def self.drives_for_company(company)
+        Driver.where("company = ?", "#{company}")
     end
-
-    #want to search by any company name
-    def self.drives_for_lyft
-        Driver.where("company = ?", "Lyft")
-    end
-
-
 
     # **UPDATE METHOD**   (need help here)
-    def update_an_attrbute(attribute)
-        self.update(attribute)
+    def update_attribute(attribute, value)
+        if(self.has_attribute?("#{attribute}"))
+            self.update("#{attribute}": "#{value}")
+        else
+            false
+        end
     end
 
-
-    
     # **DELETE METHOD**
     #Delete a specific driver by the ID
     def self.delete_by_id(id)
@@ -68,12 +60,12 @@ class Driver < ActiveRecord::Base
         driver.destroy
     end
 
-
-
     def total_money_earned
+        riders.pluck(:amount).sum
     end
 
     def all_riders_who_tip
+        riders.where("trips.tip == 1").distinct.map {|rider| "#{rider.first_name} #{rider.last_name}"}
     end
 
 end

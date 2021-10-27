@@ -38,9 +38,9 @@ class TripsController < ApplicationController
         trip.to_json
     end
 
-    # Grab all trips
+    # Grab info of all trips(the joiner table)
     get "/trips" do
-        trips = Trip.all.limit(20)
+        trips = Trip.all
         trips.to_json
     end
 end

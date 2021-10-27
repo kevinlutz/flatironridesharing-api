@@ -11,7 +11,7 @@ class RidersController < ApplicationController
         rider = Rider.create(
             first_name: params[:first_name], 
             last_name: params[:last_name], 
-            age: params[:age], 
+            age: params[:age]
         )
         rider.to_json
     end
@@ -19,8 +19,8 @@ class RidersController < ApplicationController
     patch '/riders/:id' do
         rider = Rider.find(params[:id])
         rider.update(
-            first_name: params[:first_name]
-            last_name: params[:last_name]
+            first_name: params[:first_name],
+            last_name: params[:last_name],
             age: params[:age]
         )
         rider.to_json

@@ -21,7 +21,7 @@ class DriversController < ApplicationController
     end
     
     post '/drivers' do
-        driver = Driver.create_new_driver(params[:first_name], params[:last_name], params[:years_of_experience, params[:company])
+        driver = Driver.create_new_driver(params[:first_name], params[:last_name], params[:years_of_experience], params[:company])
         driver.to_json
     end
     

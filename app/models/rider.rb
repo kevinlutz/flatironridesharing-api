@@ -2,8 +2,8 @@ class Rider < ActiveRecord::Base
     has_many :trips
     has_many :drivers, through: :trips
 
-  def self.create_new_rider(first_name, last_name, age)
-      Rider.create(first_name: first_name, last_name: last_name, age: age)
+  def self.create_new_rider(name, age)
+      Rider.create(name: name, age: age)
   end
 
   def total_distance_traveled

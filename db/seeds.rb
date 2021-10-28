@@ -5,8 +5,7 @@ list_of_companies = ["Uber", "Lyft", "Grab", "Waze", "DiDi", "RoboTaxi"]
 10.times do
   # create a driver with random data
   Driver.create(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    name: Faker::Name.name,
     company: list_of_companies[rand(0..5)],
     years_of_experience: rand(0..15) # random number between 0 and 15
   )
@@ -16,8 +15,7 @@ puts "Seeding riders..."
 15.times do
   # create a driver with random data
   Rider.create(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    name: Faker::Name.name,
     age: rand(15..65) # random number between 15 and 65
   )
 end

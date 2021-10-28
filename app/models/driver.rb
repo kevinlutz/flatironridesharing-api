@@ -3,8 +3,8 @@ class Driver < ActiveRecord::Base
     has_many :riders, through: :trips
 
     # **CREATE METHOD** (doesn't persist however)
-    def self.create_new_driver(first_name, last_name, years_of_experience, company)
-        Driver.create(first_name: first_name, last_name: last_name, years_of_experience: years_of_experience, company: company)
+    def self.create_new_driver(name, years_of_experience, company)
+        Driver.create(name: name, years_of_experience: years_of_experience, company: company)
     end
 
     # **READ CLASS METHOD**
@@ -13,15 +13,10 @@ class Driver < ActiveRecord::Base
     end
 
     # **READ INSTANCE METHODS**
-    #Show the full name of a specific driver
-    def full_name
-        "#{self.first_name} #{self.last_name}"
-    end
-
     #Show all the riders that a specific driver drove
     def list_all_riders
         self.trips.map do |trip|
-            "#{trip.rider.first_name} #{trip.rider.last_name}"
+            "#{trip.rider.name}"
         end
     end
 
@@ -65,7 +60,7 @@ class Driver < ActiveRecord::Base
     end
 
     def all_riders_who_tip
-        riders.where("trips.tip == 1").distinct.map {|rider| "#{rider.first_name} #{rider.last_name}"}
+        riders.where("trips.tip == 1").distinct.map {|rider| "#{rider.name}"}
     end
 
 end

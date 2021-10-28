@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
     set :default_content_type, 'application/json'
     
-    post '/riders' do
+    post '/trips' do
         trip = Trip.create(
             distance: params[:distance], 
             amount: params[:amount], 
@@ -13,7 +13,7 @@ class TripsController < ApplicationController
         trip.to_json
     end
 
-    post '/riders/:id' do
+    post '/trips/:id' do
         trip = Trip.find(params[:id])
         trip = Trip.update(
             distance: params[:distance], 
@@ -27,7 +27,7 @@ class TripsController < ApplicationController
     end
 
     # Remove a rider
-    delete '/riders/:id' do
+    delete '/trips/:id' do
         trip = Trip.find(params[:id])
         trip.destroy
     end
@@ -41,6 +41,6 @@ class TripsController < ApplicationController
     # Grab info of all trips(the joiner table)
     get "/trips" do
         trips = Trip.all
-        trips.to_json
+        trips.to_json(:include => [:driver, :rider])
     end
 end

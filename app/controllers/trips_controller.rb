@@ -32,6 +32,13 @@ class TripsController < ApplicationController
         trip.destroy
     end
 
+    # Update a tip
+    patch '/trips/:id' do
+        trip = Trip.find(params[:id])
+        trip.update(amount: params[:amount])
+        trip.to_json
+    end
+
     # Grab trip by ID
     get '/trips/:id' do
         trip = Trip.find(params[:id])

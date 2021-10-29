@@ -10,7 +10,7 @@ class TripsController < ApplicationController
             rider_id: params[:rider_id], 
             driver_id: params[:driver_id], 
         )
-        trip.to_json
+        trip.to_json(:include => [:driver, :rider])
     end
 
     post '/trips/:id' do
@@ -36,7 +36,7 @@ class TripsController < ApplicationController
     patch '/trips/:id' do
         trip = Trip.find(params[:id])
         trip.update(amount: params[:amount])
-        trip.to_json
+        trip.to_json(:include => [:driver, :rider])
     end
 
     # Grab trip by ID
